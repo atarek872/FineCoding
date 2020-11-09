@@ -27,6 +27,8 @@
     },
     "web": {
       "favicon": "./app/assets/favicon.png"
-    }
+    },
+    "description": "Mobile App Demo (React Native)",
+    "githubUrl": "https://github.com/atarek872/FineCodng/tree/master"
   }
 }

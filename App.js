@@ -4,6 +4,8 @@ import { Dimensions, StyleSheet, Text, View , SafeAreaView ,TouchableOpacity} fr
 import { useDimensions , useDeviceOrientation} from '@react-native-community/hooks'
 import WelcomeScreen from './app/screens/WelcomeScreen';
 import ViewImageScreen from './app/screens/ViewImageScreen';
+import CardsView from './app/screens/CardsView';
+import CardDetails from './app/screens/CardDetails';
 
 export default function App() {
 ///const { width, height } = useDimensions().screen
@@ -11,7 +13,7 @@ export default function App() {
 
 //const {landscape} = useDeviceOrientation();
   return (
-   <ViewImageScreen/>
+   <CardDetails/>
 //    <SafeAreaView style={{
 //     flex:1,
 //     justifyContent:'center',
