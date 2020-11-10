@@ -1,19 +1,21 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { Dimensions, StyleSheet, Text, View , SafeAreaView ,TouchableOpacity} from 'react-native';
+import { Dimensions, StyleSheet, Text, View,LogBox, SafeAreaView ,TouchableOpacity} from 'react-native';
 import { useDimensions , useDeviceOrientation} from '@react-native-community/hooks'
 import WelcomeScreen from './app/screens/WelcomeScreen';
 import ViewImageScreen from './app/screens/ViewImageScreen';
 import CardsView from './app/screens/CardsView';
 import CardDetails from './app/screens/CardDetails';
-
+import MessagesScreen from './app/screens/MessagesScreen';
+LogBox.ignoreLogs(['Remote debugger']);
 export default function App() {
 ///const { width, height } = useDimensions().screen
 //console.log(width);
 
 //const {landscape} = useDeviceOrientation();
   return (
-   <CardDetails/>
+    
+   <MessagesScreen />
 //    <SafeAreaView style={{
 //     flex:1,
 //     justifyContent:'center',

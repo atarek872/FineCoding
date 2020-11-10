@@ -1,8 +1,12 @@
 import React from 'react';
-import {Image, StyleSheet ,View} from 'react-native';
+import {Image, StyleSheet ,View ,TouchableOpacity} from 'react-native';
 import AppText from './AppText';
-function ListItem({image,title,price}) {
+import Swipeable from 'react-native-gesture-handler/Swipeable';
+
+function ListItem({image,title,price ,onPress,renderRightActions}) {
     return (
+        <Swipeable renderRightActions={renderRightActions}>
+        <TouchableOpacity onPress={onPress}>
         <View style={styles.Container}>
             <Image style={styles.image} source={image} />
             <View>
@@ -10,12 +14,14 @@ function ListItem({image,title,price}) {
           <AppText style={styles.price}>{price}</AppText>
             </View>
         </View>
+        </TouchableOpacity>
+        </Swipeable>
     );
 }
 const styles = StyleSheet.create({
     Container:{
         flexDirection:'row',
-
+        padding:15
     },
     image:{
         width:70,
