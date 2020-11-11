@@ -1,71 +1,61 @@
-import React, { Component , useState } from 'react';
-import { View,StyleSheet ,FlatList, SafeAreaView ,Platform,StatusBar, Text,TouchableWithoutFeedback} from 'react-native';
+import React, { useState } from "react";
+import { FlatList, StyleSheet, View } from "react-native";
+
+import Screen from "../components/Screen";
 import ListItem from "../components/ListItem";
-import { MaterialCommunityIcons } from '@expo/vector-icons';
-const Initialmessages = [
-    {
-        id:1,
-        title:'T1',
-        desc:'LE 200',
-        image:require('../assets/abdallah.jpg')
-    },{
-        id:2,
-        title:'T2',
-        desc:'LE 100',
-        image:require('../assets/Sasi.jpg')
-    },
-]
+import ListItemSeparator from "../components/ListItemSeparator";
+import ListItemDeleteAction from "../components/ListItemDeleteAction";
 
-function MessagesScreen(){
-  const [messages , setMessages] = useState(Initialmessages);
+const initialMessages = [
+  {
+    id: 1,
+    title: "T1",
+    description: "D1",
+    image: require("../assets/mosh.jpg"),
+  },
+  {
+    id: 2,
+    title: "T2",
+    description: "D2",
+    image: require("../assets/mosh.jpg"),
+  },
+];
 
-  const [refreshing , setRefreshing] = useState(false);
+function MessagesScreen(props) {
+  const [messages, setMessages] = useState(initialMessages);
+  const [refreshing, setRefreshing] = useState(false);
 
-  const handelDelete = msg => {
-      // delete te message from messages
-      const newMessages = messages.filter(m => m.id !== msg.id);
-      //call the server
-      setMessages(newMessages);
-  }
+  const handleDelete = (message) => {
+    // Delete the message from messages
+    setMessages(messages.filter((m) => m.id !== message.id));
+  };
 
-    return (
-      <SafeAreaView style={styles.screen}>
-      <FlatList 
-      data={messages}
-      keyExtractor={messages => messages.id.toString()}
-      renderItem={({item}) => <ListItem 
-      title={item.title}
-      price={item.desc}
-      image={item.image}
-      onPress={()=> console.log('touch',item)}
-      renderRightActions={() => 
-      <TouchableWithoutFeedback onPress={() => handelDelete(item)}>
-          <View style={{backgroundColor:'red',width:70,justifyContent:'center',alignItems:'center'}}>
-          <MaterialCommunityIcons 
-          name="trash-can"
-          size={35}
-          color="white"
+  return (
+    <Screen style={{flex:1}}>
+      <FlatList
+        data={messages}
+        keyExtractor={(message) => message.id.toString()}
+        renderItem={({ item }) => (
+          <ListItem
+            title={item.title}
+            subTitle={item.description}
+            image={item.image}
+            onPress={() => console.log("Message selected", item)}
+            renderRightActions={() => (
+              <ListItemDeleteAction onPress={() => handleDelete(item)} />
+            )}
           />
-          </View>
-      </TouchableWithoutFeedback>
-      }
-      />}
-      ItemSeparatorComponent={() => <View style={{width:"100%" , height:1 ,backgroundColor:'#f8f4f4'}} ></View>}
-      refreshing={refreshing}
-      onRefresh={() => {
-        setMessages(Initialmessages);
-      }}
+        )}
+        ItemSeparatorComponent={ListItemSeparator}
+        refreshing={refreshing}
+        onRefresh={() => {
+          setMessages(initialMessages);
+        }}
       />
-      </SafeAreaView>
-    );
-  }
+    </Screen>
+  );
+}
 
-const styles = StyleSheet.create({
-    screen:{
-      paddingTop:Platform.OS === 'android' ? StatusBar.currentHeight : 0,
-      // backgroundColor:'yellow',
-      flex:1
-    }
-})
+const styles = StyleSheet.create({});
 
 export default MessagesScreen;
