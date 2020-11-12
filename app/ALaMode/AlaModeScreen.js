@@ -1,5 +1,5 @@
 import React from 'react';
-import { View,StyleSheet,ImageBackground ,Image,Text} from 'react-native';
+import { View,StyleSheet,ImageBackground ,Image,Text,Dimensions} from 'react-native';
 
 function AlaModeScreen(props) {
     return (
@@ -39,11 +39,11 @@ const styles = StyleSheet.create({
         width:"100%",
         justifyContent:"center",
         alignItems:"center",
-        paddingTop:240
+        paddingTop:Dimensions.get('screen').height / 3.4
       },
       LogoIcon:{
         position:"absolute",
-        top:280,
+        top:Dimensions.get('screen').height / 3,
         left:0,
         right:0,
         bottom:0,

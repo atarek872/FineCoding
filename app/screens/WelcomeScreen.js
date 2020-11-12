@@ -1,13 +1,16 @@
 import React from "react";
 import { ImageBackground, StyleSheet, View, Image, Text } from "react-native";
 import AppButton from "../components/AppButton";
+import { useDimensions } from '@react-native-community/hooks'
 
 function WelcomeScreen(props) {
+      const { width, height } = useDimensions().window
+
   return (
     <ImageBackground
       blurRadius={10}
       style={styles.background}
-      source={require("../assets/BG.png")}
+      source={require("../assets/background.jpg")}
     >
       <View style={styles.logoContainer}>
         <Image style={styles.logo} source={require("../assets/logo-red.png")} />
@@ -22,7 +25,6 @@ function WelcomeScreen(props) {
 }
 
 const styles = StyleSheet.create({
-
   background: {
     flex: 1,
     justifyContent: "flex-end",
@@ -38,7 +40,7 @@ const styles = StyleSheet.create({
   },
   logoContainer: {
     position: "absolute",
-    top: 70,
+    top: 170,
     alignItems: "center",
   },
   tagline: {
