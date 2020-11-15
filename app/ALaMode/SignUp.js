@@ -1,5 +1,5 @@
 import React ,{useState} from "react";
-import { StyleSheet ,Image,ImageBackground, View ,Text,Linking} from "react-native";
+import { StyleSheet ,Image,ImageBackground, View ,Text,Linking ,Dimensions} from "react-native";
 
 import * as Yup from "yup";
 import Screen from '../components/Screen';
@@ -7,8 +7,8 @@ import AppText from '../components/AppText';
 import CheckBox from '@react-native-community/checkbox';
 
 import {
-    AppForm as Form,
-    AppFormField as FormField,
+    Form,
+    FormField,
     SubmitButton,
   } from "../components/forms";
 import colors from "../config/colors";
@@ -19,16 +19,16 @@ const validationSchema = Yup.object().shape({
     name: Yup.string().required().label("Name"),
     email: Yup.string().required().email().label("Email"),
     password: Yup.string().required().min(4).label("Password"),
-    toggle: Yup.boolean().required(true),
+    // toggle: Yup.boolean().required(true),
   });
-function SignUp(props) {
+function SignUp({navigation}) {
 
     return (
         <Screen>
             <Image style={styles.HeadImage} source={require('../assets/Banner-thumb.png')}/>
             <ImageBackground style={styles.BlackImage} source={require('../assets/Path-1175.png')}>
            <View style={styles.Form}>
-           <AppText children="Sign In" style={{color:'white',fontWeight: "bold",fontSize:20}}/>
+           <AppText children="Sign Up" style={{color:'white',fontWeight: "bold",fontSize:20}}/>
 
                 <Form
                     initialValues={{ name: "", email: "", password: ""  }}
@@ -70,12 +70,12 @@ function SignUp(props) {
                         }}
                         name="toggle"
                     />
-                   <Text style={{color:'white',fontWeight: "bold",fontSize:20 ,paddingLeft:40,paddingTop:2}}>By creating an account, you agree to the Kenakata <Text
-                    style={{color:colors.whiteBrown,fontWeight: "bold",fontSize:20 ,paddingLeft:40,paddingTop:2,textDecorationLine: 'underline'}}
+                   <Text style={{color:'white',fontWeight: "bold",fontSize:14 ,paddingLeft:40,paddingTop:2}}>By creating an account, you agree to the Kenakata <Text
+                    style={{color:colors.whiteBrown,fontWeight: "bold",fontSize:14 ,paddingLeft:40,paddingTop:2,textDecorationLine: 'underline'}}
                     onPress={() => {
                         Linking.openURL('https://google.com');
                     }}>Terms of service</Text> and <Text
-                   style={{color:colors.whiteBrown,fontWeight: "bold",fontSize:20 ,paddingLeft:40,paddingTop:2,textDecorationLine: 'underline'}}
+                   style={{color:colors.whiteBrown,fontWeight: "bold",fontSize:14 ,paddingLeft:40,paddingTop:2,textDecorationLine: 'underline'}}
                    onPress={() => {
                     Linking.openURL('https://google.com');
                   }}>privacy policy</Text>.</Text>
@@ -88,11 +88,9 @@ function SignUp(props) {
                 
             </View>
             <View style={styles.SignIN}>
-            <Text style={{color:'white',fontWeight: "bold",fontSize:20 ,paddingTop:80,alignItems:"center"}}>Already have an account? <Text
+            <Text style={{color:'white',fontWeight: "bold",fontSize:20 ,alignItems:"center"}}>Already have an account? <Text
                     style={{color:colors.whiteBrown,fontWeight: "bold",fontSize:20 ,paddingLeft:40,paddingTop:2,textDecorationLine: 'underline'}}
-                    onPress={() => {
-                        Linking.openURL('https://google.com');
-                    }}>Sign In</Text></Text>
+                    onPress={() => navigation.navigate("LoginScreen")}>Sign In</Text></Text>
             </View>
             </ImageBackground>
         </Screen>
@@ -104,7 +102,7 @@ const styles = StyleSheet.create({
   },
   HeadImage:{
       width:"100%",
-
+      height:Dimensions.get('window').height /3
     },
   BlackImage:{
       width:"100%",
@@ -112,7 +110,6 @@ const styles = StyleSheet.create({
       borderTopLeftRadius: 30,
       height:"100%", 
       overflow: 'hidden',
-      
   },
   Form:{
       paddingTop:20,
